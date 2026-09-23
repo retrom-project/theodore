@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "forkRepository": "https://github.com/retrom-project/theodore",
+  "defaultBranch": "retrom/g4d469ce0f71e",
+  "upstreamMirrorBranch": "master",
+  "upstreams": [
+    {
+      "role": "core",
+      "repository": "https://github.com/Zlika/theodore",
+      "refType": "COMMIT",
+      "ref": "4d469ce0f71ee046ceb78cdbf8e9f18364aaa918",
+      "commit": "4d469ce0f71ee046ceb78cdbf8e9f18364aaa918"
+    }
+  ],
+  "adapterAbi": "emulatorjs-state-v1",
+  "releaseAssets": [
+    "theodore-wasm.data",
+    "LICENSE",
+    "source.tar.gz",
+    "rpg-runtime-release.json"
+  ]
+}
