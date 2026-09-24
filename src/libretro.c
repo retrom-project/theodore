@@ -183,6 +183,7 @@ void retro_init(void)
         { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_DOWN,  "Down" },
         { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_RIGHT, "Right" },
         { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_B,     "Fire" },
+        { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_A,     "Space" },
         { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_SELECT,"Show/Hide Virtual Keyboard" },
         { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_START, "Start Program" },
         { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_Y,     "Move Virtual Keyboard" },
@@ -299,7 +300,7 @@ static void pointerToScreenCoordinates(int *x, int *y)
 static void update_input_virtual_keyboard()
 {
   bool select, start;
-  bool b, y;
+  bool a, b, y;
   bool left, right, up, down;
   bool click;
   
@@ -314,7 +315,13 @@ static void update_input_virtual_keyboard()
   left = input_state_cb(0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_LEFT);
   right = input_state_cb(0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_RIGHT);
   b = input_state_cb(0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_B);
+  a = input_state_cb(0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_A);
   click = input_state_cb(MAX_CONTROLLERS, RETRO_DEVICE_POINTER, 0, RETRO_DEVICE_ID_POINTER_PRESSED);
+
+  if (a != last_btn_state.a)
+  {
+    keyboard(libretroKeyCodeToThomsonScanCode[RETROK_SPACE], a);
+  }
 
   // Try to start the currently loaded program
   if (!vkb_show && start && !last_btn_state.start)
@@ -445,6 +452,7 @@ static void update_input_virtual_keyboard()
   last_btn_state.select = select;
   last_btn_state.start = start;
   last_btn_state.y = y;
+  last_btn_state.a = a;
   last_btn_state.b = b;
   last_btn_state.left = left;
   last_btn_state.right = right;
